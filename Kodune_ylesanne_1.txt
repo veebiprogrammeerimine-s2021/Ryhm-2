@@ -1,0 +1,30 @@
+Esimene kodune ülesanne puudutab peamiselt vajalike ühenduste töölesaamist.
+
+1) Paigaldage oma arvutisse vajalik tarkvara!
+Arvutiklassi eeskujul Windows arvutisse:
+a) terminalühenduse (ja ka veebitunneli) jaoks Putty (internetist leiab putty.exe, installeerimist ei ole vaja).
+b) failitranspordiks WinSCP, võib ka FileZilla
+c) skriptide kirjutamiseks Notepad++
+
+Mac arvutile:
+a) terminal peaks olemas olema
+b) failitranspordiks FileZilla, Cyber Duck, Coda
+c) Sublime Text või mõni analoog
+
+2) Looge failitranspordi programmiga ühendus serveriga greeny.cs.tlu.ee! Seejuures vajate tunnelit läbi lin2.tlu.ee serveri (seal on sama kasutaja, mis Teil on üliikooli e-posti ja ÕIS-i jaoks)! WinSCP jaoks on väike õpetus githubis.
+
+3) Laadige oma tunnis loodud HTML fail oma arvutisse. Muutke seal midagi - lisage mõni tekstilõik või pilt vms! Laadige muudetud fail uuesti veebiserverisse greeny.
+
+4) Looge tunnel ülikooli veebipuhvri kasutamiseks, et saaksite veebibrauseiga näha oma veebilehte greeny.cs.tlu.ee/~omakasutajanimi
+
+Selleks soovitan juhendit "Tallinna Ülikooli veebipuhvri teenuse kasutamine väljaspool ülikooli arvutivõrku", mille leiate aadressil: https://www.tlu.ee/taxonomy/term/79/juhendid-ja-abimaterjalid
+
+Võite tunneli loomist ka mujalt leitud materjalidest uurida kuid pidage meeles: 
+veebipuhvri aadress on cache.tlu.ee ja kasutatav port peab olema 3128
+
+Soovitan tunneli kasutamiseks paigaldada oma arvutisse eraldi veebibrauseri, näiteks Firefox, millel saab omal eraldi võrgusätteid määrata.
+
+Kui olete brauseris näinud oma äsja muudetud veebilehte, ongi kõik tehtud!
+
+Edu!
+Kohtumiseni järgmises tunnis!
