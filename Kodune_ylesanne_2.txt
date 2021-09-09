@@ -1,0 +1,20 @@
+Teine kodune ülesanne on juba päris programmeerimisega seotud.
+
+Tunnis kopeerisime oma esimese tunni html faili ja muutsime faili nime: page.php
+
+Selles failis ongi meil juba ka programmeeritud osa.
+
+Tunni jooksul küsisime ka vaid kellaaega, tunde: date("H")
+
+Nüüd on vaja päev jagada vähemalt kolmeks erinevaks osaks, näiteks:
+>8 või >=23  uneaeg
+>=8 ja <=18  tundide aeg
+<=18 ja <23  vaba aeg
+
+Lehel peab olema kirjas (lehe avamise hetke järel), ka see info!
+
+Tehke nii, et koolipäevadel ja puhkepäevadel oleks need päeva osad erinevad! Selleks lisage tingimuslaused juba olemasoleva tingimuslause, mis kontrollib kooli- või puhkepäeva, sisse!
+
+Täiendavast, 3 foto loosimise "boonus"ülesandest otsustasin loobuda!
+
+Kodutöö palun järgmises tunnis kohe alguses ekraanile nähtavale panna!
