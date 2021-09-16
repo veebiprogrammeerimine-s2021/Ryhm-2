@@ -1,0 +1,69 @@
+github.com keskkonnas luua endale repositoorium. Meie kursusel kasutame sellel nime "veebiprogrammeerimine".
+
+Nüüd PUTTY või mõne teise SSH klientprorammiga logida greeny.cs.tlu.ee serverisse.
+
+Kõigepealt tuleb repositoorium kloonida public_html kataloogi sisse, tekkib repositooriumi nimega kataloog ja selle sisse .git/config fail.
+
+Github repositooriumi kloonimine:
+git clone https://git_kasutajanimi@github.com/git_kasutajanimi/repo_nimi
+
+NB! pärast protokolli tähist "https:"" tuleb kasutajanimi ja @ märk ise lisada!
+Näiteks:
+git clone https://andrusrinde@github.com/andrusrinde/1.harjutus
+
+git clone https://andrusrinde@github.com/andrusrinde/veebiprogrammeerimine.git
+
+NB! Edasi tuleb kõikide järgnevate toimingute jaoks olla just kloonitud kataloogi sees!!!
+
+Selle vaatamiseks, millise repositooriumiga antud kataloog seotud on:
+
+git remote -v
+
+Et saaks hakata uuendusi github'i laadima, tuleb kataloogile määrata oma nimi ja github'i e-postiaadress.
+
+Oma kasutajanime määramine antud kataloogile:
+git config user.name "Eesnimi Perekonnanimi"
+
+Üldiseks (et ei peaks kunagi selles serveris enam nime määrama):
+git config --global user.name "Eesnimi Perekonnanimi"
+
+Kontrollida saab, mis nimi on kataloogile määratud:
+git config user.name
+
+Oma kasutaja e-post githubis määrata (et kes lisas git-i) (ühele kataloogile):
+git config user.email gitkasutajanimi@users.noreply.github.com
+
+Näiteks:
+git config user.email andrusrinde@users.noreply.github.com
+
+Üldiseks (et ei peaks kunagi selles serveris enam nime määrama):
+git config --global user.email gitkasutajanimi@users.noreply.github.com
+
+Kontrollida saab:
+git config user.email
+
+=================================================================================================
+Github oleku vaatamine:
+git status
+
+Kõigi muudetud failide lisamine git laadimisnimekirja
+git add .
+
+Nimekirja lisatud failide määramine üleslaadimiseks ja kommenteerimiseks:
+
+git commit -m "kommentaar, mida uut on tehtud"
+
+Failide üleslaadimine:
+git push
+
+=================================================================================================
+Kui muudatusi on tehtud GitHub'is ja need ei kajastu serverisse kloonitud failides, siis tuleb need GitHub'ist tõmmata!
+
+git pull
+
+=================================================================================================
+Kui on tarvis vältida mõne faili või kataloogi GitHub'i repositooriumisse laadimise nimekirjast välja arvata, siis tuleb serverisse kloonitud repositooriumisse luua fail nimega ".gitignore" ja selle sisse panna eraldi ridadele kirja failid ja/või kataloogid, näiteks:
+
+pic_uploads/
+logofiles/
+important.php

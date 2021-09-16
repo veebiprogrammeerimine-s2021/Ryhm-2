@@ -1,0 +1,18 @@
+Kolmanda kodutöö raames tuleb jätkata tööd tunnis alustatud failiga page2.php
+
+1) Tunni lõpus lõime tsükli abil HTML sisendi <select> ja paigutasime selle uude vormi.
+
+Täiendage vormi submit tüüpi sisendiga.
+
+PHP osas, pärast juhusliku foto loosimist ja selle näitamise jaoks HTML koodi moodustamist aga enne selle <select> elemendi moodustamise osa, tuleb lisada kontroll, kas kasutaja klikkis selle uue, foto valimise vormi submit nuppu.
+Kui jah, siis tuleb moodustada HTML kood just valitud pildi näitamiseks.
+<select> elemendi abil tehtud valiku väärtus on meil arv, mis vastab valitud pildi indeksile (numbrile) fotode massiivis.
+Kasutada tuleks seda sama muutujat, mis juhusliku pildi näitamise HTML koodi jaoks! Nii saate olukorra, kus kasutaja näeb juhuslikku pilti (kui ise ei valinud) või ise valitud pilti).
+
+2) Praegu on lehe avamisel rippmenüüs kohe näha kõige esimene pildifail. Vaja oleks aga näha selle pildi, mis kas juhuslikult või kasutaja valitult parajasti nähtaval on.
+Selleks tuleks tsükli sees, <option> elementide loomisel kontrollida, kas parajasti moodustatava valiku number (see indeks ehk $i väärtus) vastab just näitamiseks määratud (juhuslikult või kasutaja valitult) pildi numbrile massiivis. Kui vastab (väärtused on samad), siis peab valiku element (HTML) nägema välja selline:
+<option value="x" select>pildifail.jpg</option>
+
+3) Pildifaili all tuleks alati näidata pildi failinime.
+
+4) Tehtud muudatused tuleb github-i laadida!
