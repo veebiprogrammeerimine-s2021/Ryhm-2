@@ -55,13 +55,13 @@
 	$photo_select_html = '<select name="photo_select">' ."\n";
 	for($i = 0; $i < $limit; $i ++){
 		//<option value="0">fail.jpg</option>
-		$photo_select_html .= "\t \t" .'<option value="' .$i .'"';
+		$photo_select_html .= "\t \t \t" .'<option value="' .$i .'"';
 		if($i == $pic_num){
 			$photo_select_html .= " selected";
 		}
 		$photo_select_html .= ">" .$photo_files[$i] ."</option> \n";
 	}
-	$photo_select_html .= "</select> \n";
+	$photo_select_html .= "\t \t </select> \n";
 ?>
 <!DOCTYPE html>
 <html lang="et">
