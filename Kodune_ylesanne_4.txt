@@ -1,0 +1,20 @@
+Seekord on tegemist osalt kordamise/harjutamisega aga natuke ka ise uute vahendite "avastamisega".
+
+Meie filmi tabelisse uute filmide lisamise vorm tuleb korda teha:
+1) Iga sisestust (pealkiri, aasta jne) eraldi kontrollida, kas ikka on mingi väärtus. Iga sisestusvälja kohta on vaja lisada ka eraldi muutuja, mis võimaliku vea teatab (andmed puudu) ning seda siis ka sisestusvälja kõrval näidata.
+2) Iga sisestust tuleb muutuja abil ka "meeles pidada". Kui midagi jäi sisestamata, siis uuele ringile minnes tuleb varem sisestatud väärtused vastavatel väljadel alles hoida.
+
+Mõlemat eelnevat tegime kolmandas tunnis.
+
+3) Iga sisestuse puhul tuleks andmeid ka "valideerida" ehk nende korrektsust kontrollida ja vajadusel "ohtlikud" või vigased väärtused kõrvaldada.
+Selleks tuleks kasutada filter funktsiooni.
+Näiteid, juhendeid leiate:
+https://supunkavinda.blog/php/input-validation-with-php
+https://www.php.net/manual/en/filter.filters.validate.php
+https://www.w3schools.com/php/php_filter.asp
+
+Vaadake ka:
+https://www.w3schools.com/php/php_form_validation.asp
+Siit näete, kuidas peaks form elemendi algusmärgendis asju muutma ja kuidas teha sisendi testimise funktsioon.
+
+Ja kui sisend on valideeritud, siis tuleks seda väärtuse olemasolu ehk !empty tingimust kontrollida just valideeritud väärtustega. Muidu võib juhtuda, et alguses sisestati mingi jama ja lõpuks on sisestus ikka tühi.
