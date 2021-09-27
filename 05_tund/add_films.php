@@ -81,23 +81,23 @@
         <br>
         <label for="year_input">Valmimisaasta</label>
         <input type="number" name="year_input" id="year_input" min="1912" value="<?php echo $year_input; ?>">
-		<?php echo $year_input_error; ?></span>
+		<span><?php echo $year_input_error; ?></span>
         <br>
         <label for="duration_input">Kestus</label>
         <input type="number" name="duration_input" id="duration_input" min="1" value="<?php echo $duration_input; ?>" max="600">
-		<?php echo $duration_input_error; ?></span>
+		<span><?php echo $duration_input_error; ?></span>
         <br>
         <label for="genre_input">Filmi žanr</label>
         <input type="text" name="genre_input" id="genre_input" placeholder="žanr" value="<?php echo $genre_input; ?>">
-		<?php echo $genre_input_error; ?></span>
+		<span><?php echo $genre_input_error; ?></span>
         <br>
         <label for="studio_input">Filmi tootja</label>
         <input type="text" name="studio_input" id="studio_input" placeholder="filmi tootja" value="<?php echo $studio_input; ?>">
-		<?php echo $studio_input_error; ?></span>
+		<span><?php echo $studio_input_error; ?></span>
         <br>
         <label for="director_input">Filmi režissöör</label>
         <input type="text" name="director_input" id="director_input" placeholder="filmi režissöör" value="<?php echo $director_input; ?>">
-		<?php echo $director_input_error; ?></span>
+		<span><?php echo $director_input_error; ?></span>
         <br>
         <input type="submit" name="film_submit" value="Salvesta">
     </form>
