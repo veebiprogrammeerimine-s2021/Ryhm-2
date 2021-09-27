@@ -1,4 +1,8 @@
 <?php
+    //alustame sessiooni
+    session_start();
+    require_once("../../../../config_vp_s2021.php");
+    require_once("fnc_user.php");
 	$author_name = "Andrus Rinde";
 	$todays_evaluation = null; //$todays_evaluation = "";
 	$inserted_adjective = null;
@@ -62,6 +66,11 @@
 		$photo_select_html .= ">" .$photo_files[$i] ."</option> \n";
 	}
 	$photo_select_html .= "\t \t </select> \n";
+    
+    //sisselogimine
+    if(isset($_POST["login_submit"])){
+        sign_in($_POST["email_input"], $_POST["password_input"]);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="et">
@@ -74,6 +83,12 @@
 	<p>See leht on valminud õppetöö raames ja ei sisalda mingisugust tõsiseltvõetavat sisu!</p>
 	<p>Õppetöö toimus <a href="https://www.tlu.ee/dt">Tallinna Ülikooli Digitehnoloogiate instituudis</a>.</p>
 	<hr>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <input type="email" name="email_input" placeholder="email ehk kasutajatunnus">
+        <input type="password" name="password_input" placeholder="salasõna">
+        <input type="submit" name="login_submit" value="Logi sisse">
+    </form>
+    
     <p>Loo endale <a href="add_user.php">kasutajakonto</a></p>
     <hr>
 	<form method="POST">

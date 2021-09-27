@@ -1,5 +1,7 @@
 <?php
+    require_once("../../../../config_vp_s2021.php");
     require_once("fnc_general.php");
+    require_once("fnc_user.php");
 
     $notice = null;
     $name = null;
@@ -82,7 +84,17 @@
                 $birth_year_error = "Palun vali sünni aasta!";
             }
             
-            
+            //valideerime kuupäeva ja paneme selle kokku
+            if(empty($birth_day_error) and empty($birth_month_error) and empty($birth_year_error)){
+                if(checkdate($birth_month, $birth_day, $birth_year)){
+                    //moodustame kuupäeva
+                    $temp_date = new DateTime($birth_year ."-" .$birth_month ."-" .$birth_day);
+                    $birth_date = $temp_date->format("Y-m-d"); 
+                } else {
+                    $birth_date_error = "Valitud kuupäev on vigane!";
+                }
+            }  
+                        
             //kasutajatunnus ja parool
             if(isset($_POST["email_input"]) and !empty($_POST["email_input"])){
                 $email = filter_var($_POST["email_input"], FILTER_VALIDATE_EMAIL);
@@ -107,6 +119,11 @@
                 }
             } else {
                 $confirm_password_error = "Palun sisesta salasõna kaks korda!";
+            }
+            
+            //kui vigu pole, siis salvestame uue kasutaja
+            if(empty($name_error) and empty($surname_error) and empty($birth_month_error) and empty($birth_year_error) and empty($birth_day_error) and empty($birth_date_error) and empty($gender_error) and empty($email_error) and empty($password_error) and empty($confirm_password_error)){
+                $notice = store_new_user($name, $surname, $gender, $birth_date, $email, $_POST["password_input"]);
             }
             
         }//if isset lõppeb
