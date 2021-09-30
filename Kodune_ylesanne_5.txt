@@ -1,0 +1,8 @@
+1) lisage sisestuse kontroll ka sisselogimise vormile. E-posti aadressi peab valideerima. Seda tuleks ka meeles pidada juhuks, kui sisselogimine ei õnnestu, et ei peaks vale parooli puhul uuesti sisestama.
+Mõistlik on kontrollida, kas kasutajatunnus sisestati ja kas sisestati ka vähemalt 8 märgi pikkune parool. Vähemaga pole ju üldse mõtet sisse logimist üritada.
+
+2)Lisasime tunnis lehtedele, kus midagi sisselogimise või sisse logitud olemisega seotud, sessioonimuututa kontrollimise ($_SESSION["user_id"]), millega saame teada, kas kasutaja on sisse loginud või mitte. Lisasime ka lihtsa väljalogimise. See kõik tuleb lisada ka filmide nimekirja näitamise ja filmide lisamise lehele. Ka need on ainult sisselogitud kasutajale!
+
+3) Täiendage uue kasutaja lisamise funktsiooni kontrolliga, kas sisestatud e-maili aadressiga juba kedagi pole.
+Selleks tehke enne uue kasutaja lisamist esimese andmebaasipäringuna ($stmt) lihtne päring näiteks andmebaasist just sellise e-mailiga kasutaja id lugemiseks (SELECT id FROM vp_users WHERE email = ?).
+Kui pärin annab tõese tulemuse ehk if($stmt->fetch()), siis on kasutaja juba olemas ja tuleb edastada vastav teada. Kui aga vastet pole, siis see päring sulgeda ja teha uus, kasutaja salvestamise päring.
