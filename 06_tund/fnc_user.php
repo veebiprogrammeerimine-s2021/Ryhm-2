@@ -50,6 +50,9 @@
                 $_SESSION["user_id"] = $id_from_db;
                 $_SESSION["first_name"] = $firstname_from_db;
                 $_SESSION["last_name"] = $lastname_from_db;
+                //kui loeme ka kasutajaprofiili, siis saame teksti ja taustavärvi
+                $_SESSION["text_color"] = "#AA0000"; //#000000
+                $_SESSION["bg_color"] = "#999999"; //#FFFFFF
                 $stmt->close();
                 $conn->close();
                 header("Location: home.php");
