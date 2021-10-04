@@ -1,0 +1,27 @@
+1) user_profile.php lehel:
+vormist saadav info talletada andmetabelisse vp_userprofiles
+Antud juhul võib väljasid ka tühjaks jätta.
+Kasutaja, kelle oma profiil on, tema id saab sessioonimuutujast $_SESSION[user_id"]
+
+2) Sisselogimise funktsioonis, kui on õige parool ja kasutaja id, eesnimi ja perekonnanimi on sessioonimuutujatesse talletatud:
+Sulgege senine käsk, looge uus, mis loeb andmetabelist kasutajaprofiili (õige kasutaja id järgi). Kui profiil on olemas ( if($stmt->fetch()) ), siis tuleb kontrollida, ega värvide info tühi ole.
+Kui taustavärv on tühi - sessioonimuutujasse valge värv #FFFFFF
+Kui tekstivärv on tühi - sessioonimuutujasse must värv #000000
+
+Kui profiili ei leitud, siis just need samad värvid.
+
+
+3) Profiili peab saama ka muuta. Seega user_profile.php lehele minnes tuleb kõigepealt kohe teha päring profiilide andmetabelisse ja lugeda sisseloginud kasutaja ide järgi profiili. Kui profiili pole, siis on lühikirjeldus tühi ja värvid need esialgsed.
+Kui profiil on, siis tuleb lühikirjeldus panna ka vastavale sisendile nähtavale.
+
+Kasutaja võib värve ja lühikirjeldust muuta ja salvestada.
+
+Nüüd tuleb muuta profiili salvestamise funktsiooni!!!
+Enne tuli lihtsalt salvestada (INSERT INTO ...)
+
+Nüüd tuleb kõigepealt kontrollida, kas on olemas - lugeda profiili kasutaja id järgi.
+Kui on olemas, siis tuleb hoopis uuendada.
+Kui pole olemas, tuleb tavaline kirjutamine.
+
+Uuendamiseks SQL:
+UPDATE vp_userprofiles SET description = ?, bgcolor = ?, txtcolor = ? WHERE userid = ?
