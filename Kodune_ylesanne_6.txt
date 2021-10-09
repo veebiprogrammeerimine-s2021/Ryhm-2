@@ -1,0 +1,5 @@
+Kuues kodutöö sai alguse tunnis, isesesiva tööna.
+Palun lõpetage tunni iseseisev töö, kirjelduse leiate siit githubist 06_tund kaustast.
+
+Tööd tehes mõelge hoolega, milliseid andmeid Teil andmebaasist vaja on, mille järgi midagi kontrollida ja mida on vaja andmebaasi saata.
+Mõelge ka sellele, millised andmed on näiteks kogu aeg sessioonimuutujate kaudu kättesaadavad.
