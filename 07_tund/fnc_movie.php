@@ -61,6 +61,33 @@
         return $html;
     }
     
+    function store_person_in_movie($selected_person, $selected_movie, $selected_position, $role){
+        $notice = null;
+        $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
+        $conn->set_charset("utf8");
+        //<option value="x" selected>Film</option>
+        $stmt = $conn->prepare("SELECT id FROM person_in_movie WHERE person_id = ? AND movie_id = ? AND position_id = ? AND role = ?");
+        $stmt->bind_param("iiis", $selected_person, $selected_movie, $selected_position, $role);
+        $stmt->bind_result($id_from_db);
+        $stmt->execute();
+        if($stmt->fetch()){
+            //selline on olemas
+            $notice = "Selline seos on juba olemas!";
+        } else {
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO person_in_movie (person_id, movie_id, position_id, role) VALUES (?, ?, ?, ?)"); 
+            $stmt->bind_param("iiis", $selected_person, $selected_movie, $selected_position, $role);
+            if($stmt->execute()){
+                $notice = "Uus seos edukalt salvestatud!";
+            } else {
+                $notice = "Uue seose salvestamisle tekkis viga: " .$stmt->error;
+            }
+        }
+        $stmt->close();
+        $conn->close();
+        return $notice;
+    }
+    
 //----Vana kraam--------------------------------------------------------------------------
     function read_all_films(){
         //var_dump($GLOBALS);
