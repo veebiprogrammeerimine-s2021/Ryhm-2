@@ -88,62 +88,36 @@
         return $notice;
     }
     
-//----Vana kraam--------------------------------------------------------------------------
-    function read_all_films(){
-        //var_dump($GLOBALS);
-        //avan andmebaasiühenduse      server, kasutaja, parool, andmebaas
+    function read_person_name_for_filename($id){
+        $notice = null;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
-        //määrame vajaliku kodeeringu
         $conn->set_charset("utf8");
-        $stmt = $conn->prepare("SELECT * FROM film");
-        //igaks juhuks, kui on vigu, väljastame need
-        echo $conn->error;
-        //seome tulemused muutujatega
-        $stmt->bind_result($title_from_db, $year_from_db, $duration_from_db, $genre_from_db, $studio_from_db, $director_from_db);
-        //käsk täita
+        $stmt = $conn->prepare("SELECT first_name, last_name FROM person WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->bind_result($first_name_from_db, $last_name_from_db);
         $stmt->execute();
-        //fetch()
-        //<h3>pealkiri</h3>
-        //<ul>
-        //<li>Valmimisaasta: 1997</li>
-        //...
-        //</ul>
-        $films_html = null;
-        //while(tingimus){
-            //mida teha ...
-        //}
-        while($stmt->fetch()){
-            $films_html .= "<h3>" .$title_from_db ."</h3> \n";
-            $films_html .= "<ul> \n";
-            $films_html .= "<li>Valmimisaasta: " .$year_from_db ."</li> \n";
-            $films_html .= "<li>Kestus: " .$duration_from_db ."</li> \n";
-			$films_html .= "<li>Žanr: " .$genre_from_db ."</li> \n";
-            $films_html .= "<li>Tootja: " .$studio_from_db ."</li> \n";
-            $films_html .= "<li>Režissöör: " .$director_from_db ."</li> \n";
-            $films_html .= "</ul> \n";
+        if($stmt->fetch()){
+            $notice = $first_name_from_db ."_" .$last_name_from_db;
+        } else {
+            $notice = $id;
         }
-        //sulgeme SQL käsu
         $stmt->close();
-        //sulgeme andmebaasiühenduse
         $conn->close();
-        return $films_html;
+        return $notice;
     }
     
-    function store_film($title_input, $year_input, $duration_input, $genre_input, $studio_input, $director_input){
+    function store_person_photo($file_name, $person_id){
+        $notice = null;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
         $conn->set_charset("utf8");
-        $stmt = $conn->prepare("INSERT INTO film (pealkiri, aasta, kestus, zanr, tootja, lavastaja) values(?,?,?,?,?,?)");
-        echo $conn->error;
-        //seon SQL käsu päris andmetega, andmetüübid :i - integer, d - decimal, s - string
-        $stmt->bind_param("siisss", $title_input, $year_input, $duration_input, $genre_input, $studio_input, $director_input);
-        $success = null;
+        $stmt = $conn->prepare("INSERT INTO picture (picture_file_name, person_id) VALUES (?, ?)"); 
+        $stmt->bind_param("si", $file_name, $person_id);
         if($stmt->execute()){
-            $success = "Salvestamine õnnestus!";
+            $notice = "Uus foto edukalt salvestatud!";
         } else {
-            $success = "Salvestamisel tekkis viga: " .$stmt->error;
+            $notice = "Uue foto andmebaasi salvestamisel tekkis viga: " .$stmt->error;
         }
         $stmt->close();
         $conn->close();
-        return $success;
+        return $notice;
     }
-	
