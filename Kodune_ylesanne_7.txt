@@ -1,0 +1,14 @@
+Seitsmenda kodutööna tuleb jätkata filmide teemat ja lisada filmi seoste lisamise lehele veel ühe seostetabeli täitmise. Millise nimelt, see jääb Teie enda otsustada.
+Ilmselgelt on vaja andmetabelitesse lisada tegelasi, filme jms andmeid. Palun tehke ka selle jaoks üks leht.
+
+Tekitada on vaja ka üks leht, kus kuvatakse filmide või tegelaste kohta andmeid läbi seoste. Selleks olete andmebaaside projekteerimise kursusel õppinud JOIN käsku kasutama.
+Milliseid andmeid täpselt, see jääb Teie otsustada.
+
+Nii seoste loomisel kui ka nfo väljastamisel tuleks andmebaasist loetud kuupäevad Eesti tavade järgi vormindada. Praegu on kõik andmetabelis kujul "aasta-kuu-päev".
+
+Looge funktsioon, millele saab saata andmetabelist loetud kuupäeva ja mis tagastab Eesti tavade järgi vormindatud kuupäeva kujul "kuupäev.kuu.aasta" või siis lausa nii, et kuu on sõnadega.
+Eeskujuks saate vaadata, kuidas näiteks tegime kuupäeva ja selle vormingu uue kasutaja salvestamisel.
+Selle funktsiooni abil panetegi igale poole kuupäeva väljastamisel just selle õige variandi.
+
+Filmi pikkus on andmetabelites praegu minutites. Lisage funktsioon, millele saadate minutid ja mis tagastab fraasi tundide ja minutitega. Näiteks 84 minuti puhul tuleks vastusena "1 tund ja 24 mnutit", 56 minuti puhul "56 minutit", 121 minuti puhul "2 tundi ja 1 minut" jne.
+Kasutage seda funktsiooni film info väljastamisel.
