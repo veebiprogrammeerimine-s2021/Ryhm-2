@@ -4,4 +4,5 @@ CREATE TABLE `if21_rinde`.`vp_users` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `f
 Kasutajaprofiilid
 CREATE TABLE `if21_rinde`.`vp_userprofiles` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userid` INT(11) NOT NULL , `description` VARCHAR(2000) NULL , `bgcolor` VARCHAR(7) NULL , `txtcolor` VARCHAR(7) NULL , `picture` INT(11) NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+Galerii fotod
 CREATE TABLE `if21_rinde`.`vp_photos` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userid` INT(11) NOT NULL , `filename` VARCHAR(40) NOT NULL , `created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , `alttext` VARCHAR(256) NULL , `privacy` INT(1) NOT NULL , `deleted` DATE NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
