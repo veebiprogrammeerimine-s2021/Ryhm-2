@@ -123,7 +123,6 @@
     }
 	
 	function list_person_movie_info(){
-		//SELECT person.first_name, person.last_name, person.birth_date, person_in_movie.role, movie.title, movie.production_year, movie.duration FROM person JOIN person_in_movie ON person.id = person_in_movie.person_id JOIN movie ON movie.id = person_in_movie.movie_id
 		$html = null;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
         $conn->set_charset("utf8");
@@ -134,7 +133,7 @@
 		while($stmt->fetch()){
 			$html .= "<li>" .$first_name_from_db ." " .$last_name_from_db ." (sündinud: " .date_to_est_format($birth_date_from_db) ."), ";
 			if(!empty($role_from_db)){
-				$html .= "tegelane " .$role_from_db ." filmis " .$title_from_db ."(toodetud: " .$production_year_from_db .", kestus: " .duration_min_to_hour_and_min($duration_from_db) .")";
+				$html .= "tegelane " .$role_from_db ." filmis " .$title_from_db ." (toodetud: " .$production_year_from_db .", kestus: " .duration_min_to_hour_and_min($duration_from_db) .")";
 			} else {
 				$html .= $title_from_db ." (toodetud: " .$production_year_from_db .", kestus: " .duration_min_to_hour_and_min($duration_from_db) .")";
 			}
@@ -142,7 +141,9 @@
 		}
 		if(empty($html)){
 			$html = "<p>Info puudub.</p> \n";
-		}
+		} else {
+            $html = "<ul> \n" .$html ."</ul> \n";
+        }
 		$stmt->close();
         $conn->close();
         return $html;
