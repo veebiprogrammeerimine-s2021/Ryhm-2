@@ -1,0 +1,18 @@
+Seekord on vaja täiendada galeriipiltide üleslaadimise lehte.
+Eesmärk on luua pildigalerii, selleks siis kõigepealt vaja fotode üleslaadimise osa valmis teha.
+
+Kindlasti palun pärast kodutöö valmimist oma süsteemis ka erinevate kasutajanimedega sisse logida ning erinevate privaatsussätetega erinevaid fotosid üles laadida! Muidu pole võimalik normaalselt galeriid luua ja vaadata, kontrollida, kas kõik töötab.
+
+Piltide suuruse muutmise tegime tunnis otse lehe faili. Looge selleks hoopis funktsioon (fnc_photoupload.php faili).
+See funktsioon peaks argumentidena ootama image objekti (pikslikogum, meil siis $my_temp_image), etteantud laiust ja kõrgust. Loomulikult peab funktsioon tagastama uue pikslikogumi (väiksemaks tehtud image objekti).
+
+Täiendage funktsiooni selliselt, et ette antud laius ja kõrgus võiksid olla maksimumid (nagu tunnis tegime) või oodatavad kindlad mõõdud. Selleks tuleks funktsioonile saata veel üks argument, näiteks väärtusega true või false. True puhul peaks siis pilti kärpima, et saada täpselt etteantud mõõtudega pilt. Funktsioon peab siis sellisel juhul ka originaalpilti kärpima (siis vaja leida kopeeritava osa vasaku ülemise nurga x ja y koordinaadid, kopeeritava osa laius ja kõrgus).
+
+Lisage galerii pisipiltide loomine, mis suuruse muutmise funktsioonis ruudukujuliselt võetakse ning seatakse suurusele 100X100 pikslit. Need pisipildid salvestatakse siis vastavasse kataloogi.
+
+Githubis on Andmetabelid.txt failis kolmas, galeriipiltide andmetabeli loomise SQL-käsk. Osadel Teist on see andmetabel juba tunnis loodud aga mitte kõigil. Ärge unustage andmebaasi nimena ikka enda oma kasutada!
+
+Iga foto üleslaadimise järel lisage selle kohta kirje andmetabelisse (failinimi; userid ehk selle kasutaja id, kes pildi üles laadis ehk sisse loginud on (see on ju sessioonimuutujana olemas); alt-tekst).
+Foto enda id ja üleslaadimise aeg pannakse automaatselt. Kustutamise väli (deleted) jääb esialgu tühjaks.
+
+Vaadake foto üleslaadimise osa üle, püüdke vele mõned tegevused funktsioonidena lahendada!
