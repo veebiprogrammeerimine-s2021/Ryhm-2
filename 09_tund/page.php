@@ -3,6 +3,7 @@
     session_start();
     require_once("../../../../config_vp_s2021.php");
     require_once("fnc_user.php");
+    require_once("fnc_gallery.php");
 	$author_name = "Andrus Rinde";
 	$todays_evaluation = null; //$todays_evaluation = "";
 	$inserted_adjective = null;
@@ -125,6 +126,8 @@
 		echo $todays_evaluation;
 		
 	?>
+    <hr>
+    <?php echo show_latest_public_photo(); ?>
 	<form method="POST">
 		<?php echo $photo_select_html; ?>
 		<input type="submit" name="photo_select_submit" value="Näita valitud fotot">

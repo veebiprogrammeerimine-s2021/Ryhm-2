@@ -17,9 +17,7 @@
     
     $photo_error = null;
     $photo_upload_notice = null;
-    $photo_orig_upload_dir = "../upload_photos_orig/";
-    $photo_normal_upload_dir = "../upload_photos_normal/";
-    $photo_thumbnail_upload_dir = "../upload_photos_thumbnails/";
+
     $normal_photo_max_width = 600;
     $normal_photo_max_height = 400;
 	$thumbnail_width = $thumbnail_height = 100;
