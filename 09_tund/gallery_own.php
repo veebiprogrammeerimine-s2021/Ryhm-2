@@ -40,7 +40,7 @@
 		<li><a href="home.php">Avaleht</a></li>
     </ul>
 	<hr>
-    <h2>Fotogalerii</h2>
+    <h2>Minu oma fotod</h2>
     <p>
         <?php
             if($page > 1){
@@ -56,6 +56,6 @@
             
         ?>
     </p>
-    <?php echo read_public_photo_thumbs($page_limit, $page); ?>
+    <?php echo read_own_photo_thumbs($page_limit, $page); ?>
 </body>
 </html>

@@ -18,7 +18,12 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $_SESSION["first_name"] ." " .$_SESSION["last_name"]; ?>, veebiprogrammeerimine</title>
-    <?php echo $css_color; ?>
+    <?php
+        echo $css_color;
+        if(isset($to_head) and !empty($to_head)){
+            echo $to_head;
+        }
+    ?>
 </head>
 <body>
     <img src="../pics/vp_banner.png" alt="veebiprogrammeerimise lehe bänner">
