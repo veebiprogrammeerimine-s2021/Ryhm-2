@@ -1,0 +1,22 @@
+Seekord tuleb luua leht, mis võimaldaks oma isiklike piltide andmeid muuta ja neid kustutada.
+Tekitasime tunnis lehe gallery_own.php
+Sellele tuuakse lehekülgedena sisseloginud kasutaja kõik üles laetud fotod. Klikkides pildil, avatakse järgmine leht edit_gallery_photo.php
+Sellele saadetakse GET meetodil valitud foto id (edit_gallery_photo.php?photo=x)
+
+Lehe avamisel tuleb esiteks kontrollida, kas GET kaudu saadetud id kuulub ikka sisseloginud kasutajale endale (teete SQL päringu sellise foto andmete lugemiseks, millel on antud id ja userid oleks just sisseloginud kasutaja enda oma).
+Kui selline saadakse, siis näidatakse foto ja tema andmeid.
+Kui sellist ei leita, siis viiakse kasutaja näiteks kohe tagasi galeriisse või antakse teada, et soovitud foto andmeid muuta ei saa.
+
+Foto juurde tuleks lisada kaks vormi. Esimene pakuks võimalust muuta alt teksti ja privaatsust (kasutada saab input elemente nagu foto üles laadimisel). Submit peale tuleb foto andmed andmetabelis UPDATE käsuga muuta.
+Teine vorm peaks pakkuva vaid submit nuppu. Et submit nupu peale saaks ikka ka teada, mis id kaudu fotot kustutada, siis tuleb valida kahe võimaluse vahel:
+a) selle foto andmete lehe laadimisel tuleks valitud foto id salvestada sessioonimuutujasse, siis saab kustutamise funktsioon selle kätte.
+b) kustutamise vormile lisatakse peidetud input, mille väärtuse saab POST meetodiga kätte
+<input type="hidden" value="see_id_väärtus" name="photo_id_input">
+
+Kustutamiseks tuleb andmetabelis teha muudatus:
+UPDATE vp_photos SET deleted = NOW() WHERE id = ?
+
+Kes soovib, teeb veel juurde kustuttud fotode taastamise lehe, kuhu kogutakse vaid kustutatud fotod ja ...
+UPDATE vp_photos SET deleted = NULL WHERE id = ?
+
+Avalike fotode galeriisse võiks iga pisipildi alla lisada kuupäeva (Eesti vormingus), millel pilt üles laeti ja kes soovib, ka üles laadinud kasutaja nime.
