@@ -35,34 +35,10 @@
     
     if(isset($_POST["photo_submit"])){
         if(isset($_FILES["photo_input"]["tmp_name"]) and !empty($_FILES["photo_input"]["tmp_name"])){
-            //kas on pilt ja mis tüüpi?
-            $image_check = getimagesize($_FILES["photo_input"]["tmp_name"]);
-            if($image_check !== false){
-                if($image_check["mime"] == "image/jpeg"){
-                    $file_type = "jpg";
-                }
-                if($image_check["mime"] == "image/png"){
-                    $file_type = "png";
-                }
-                if($image_check["mime"] == "image/gif"){
-                    $file_type = "gif";
-                }
-                //var_dump($image_check);
-            } else {
-                $photo_error = "Valitud fail ei ole pilt!";
-            }
-            
-            //Kas on lubatud suurusega?
-            if(empty($photo_error) and $_FILES["photo_input"]["size"] > $photo_upload_size_limit){
-                $photo_error .= "Valitud fail on liiga suur!";
-            }
-            
+                        
             //kas alt tekst on
             if(isset($_POST["alt_input"]) and !empty($_POST["alt_input"])){
                 $alt_text = test_input(filter_var($_POST["alt_input"], FILTER_SANITIZE_STRING));
-/*                 if(empty($alt_text)){
-                    $photo_error .= "Alternatiivtekst on lisamata!";
-                } */
             }
 			
 			//kas on privaatsus
@@ -75,46 +51,25 @@
 			
             
             if(empty($photo_error)){
-                //teen ajatempli
-                $time_stamp = microtime(1) * 10000;
+                $photo_upload = new Photoupload($_FILES["photo_input"]);
+                $photo_error .= $photo_upload->check_size($photo_upload_size_limit);
                 
-                //moodustan failinime, kasutame eesliidet
-                $file_name = $photo_filename_prefix ."_" .$time_stamp ."." .$file_type;
-                
-                //võtame kasutusele klassi, kuni klass ise tüüpi kindlaks ei tee, saadan ka failitüübi
-                $photo_upload = new Photoupload($_FILES["photo_input"], $file_type);
-                
-                //loome uue pikslikogumi
-                //$my_new_temp_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
+                //failinime
+                $photo_upload->create_filename($photo_filename_prefix);
+                //normaalmõõdus foto
                 $photo_upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
-                
-                //lisan vesimärgi
-				//add_watermark($my_new_temp_image, $watermark_file);
                 $photo_upload->add_watermark($watermark_file);
-                
-                //salvestan
-                //$photo_upload_notice = "Vähendatud pildi " .save_image($my_new_temp_image, $file_type, $photo_normal_upload_dir .$file_name);
-                $photo_upload_notice = "Vähendatud pildi " .$photo_upload->save_image($photo_normal_upload_dir .$file_name);
+                $photo_upload_notice = "Vähendatud pildi " .$photo_upload->save_image($photo_normal_upload_dir .$photo_upload->file_name);
 				
 				//teen pisipildi
                 $photo_upload->resize_photo($thumbnail_width, $thumbnail_height);
-				//$my_new_temp_image = resize_photo($my_temp_image, $thumbnail_width, $thumbnail_height, false);
-                $photo_upload_notice .= " Pisipildi " .$photo_upload->save_image($photo_thumbnail_upload_dir .$file_name);
-                //imagedestroy($my_new_temp_image);
-                
-                //imagedestroy($my_temp_image);
-                
-                unset($photo_upload);
-                
+				$photo_upload_notice .= " Pisipildi " .$photo_upload->save_image($photo_thumbnail_upload_dir .$photo_upload->file_name);
                 //kopeerime pildi originaalkujul, originaalnimega vajalikku kataloogi
-                if(move_uploaded_file($_FILES["photo_input"]["tmp_name"], $photo_orig_upload_dir .$file_name)){
-                    $photo_upload_notice .= " Originaalfoto laeti üles!";
-                    //$photo_upload_notice = store_person_photo($file_name, $_POST["person_for_photo_input"]);
-                } else {
-                    $photo_upload_notice .= " Foto üleslaadimine ei õnnestunud!";
-                }
-				
-				$photo_upload_notice .= " " .store_photo_data($file_name, $alt_text, $privacy);
+                $photo_upload_notice .= $photo_upload->move_original_photo($photo_orig_upload_dir .$photo_upload->file_name);
+                
+                //kirjutame andmetabelisse
+				$photo_upload_notice .= " " .store_photo_data($photo_upload->file_name, $alt_text, $privacy);
+                unset($photo_upload);
 				$alt_text = null;
 				$privacy = 1;
             }

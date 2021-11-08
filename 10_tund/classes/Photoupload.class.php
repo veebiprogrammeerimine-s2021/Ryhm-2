@@ -1,20 +1,56 @@
 <?php
     class Photoupload {
         private $photo_to_upload;
-        private $file_type;
+        public $file_type;
         private $my_temp_image;
         private $my_new_image;
+        public $error;
+        public $file_name;
         
-        function __construct($photo, $type){
+        function __construct($photo){
             $this->photo_to_upload = $photo;
-            $this->file_type = $type;//hiljem teeb klass selle ise kindlaks
-            $this->my_temp_image = $this->create_image_from_file($this->photo_to_upload["tmp_name"] ,$this->file_type);
+            $this->error = null;
+            $this->check_image();
+            //$this->file_type = $type;//hiljem teeb klass selle ise kindlaks
+            if(empty($this->error)){ 
+                $this->my_temp_image = $this->create_image_from_file($this->photo_to_upload["tmp_name"] ,$this->file_type);
+            }
         }
         
         function __destruct(){
             if(isset($this->my_temp_image)){
                 imagedestroy($this->my_temp_image);
             }
+        }
+        
+        private function check_image(){
+            $image_check = getimagesize($this->photo_to_upload["tmp_name"]);
+            if($image_check !== false){
+                if($image_check["mime"] == "image/jpeg"){
+                    $this->file_type = "jpg";
+                }
+                if($image_check["mime"] == "image/png"){
+                    $this->file_type = "png";
+                }
+                if($image_check["mime"] == "image/gif"){
+                    $this->file_type = "gif";
+                }
+                //var_dump($image_check);
+            } else {
+                $this->error = "Valitud fail ei ole pilt!";
+            }
+        }
+        
+        public function check_size($limit){
+            if(empty($this->error) and $this->photo_to_upload["size"] > $limit){
+                $this->error .= "Valitud fail on liiga suur!";
+            }
+            return $this->error;
+        }
+        
+        public function create_filename($prefix){
+            $time_stamp = microtime(1) * 10000;
+            $this->file_name = $prefix .$time_stamp ."." .$this->file_type;
         }
         
         private function create_image_from_file($file, $file_type = "png"){
@@ -114,6 +150,16 @@
                 }
             }
             imagedestroy($this->my_new_image);
+            return $notice;
+        }
+        
+        public function move_original_photo($target){
+            $notice = null;
+            if(move_uploaded_file($this->photo_to_upload["tmp_name"], $target)){
+                    $notice .= " Originaalfoto laeti üles!";
+                } else {
+                    $notice .= " Foto üleslaadimine ei õnnestunud!";
+                }
             return $notice;
         }
         
