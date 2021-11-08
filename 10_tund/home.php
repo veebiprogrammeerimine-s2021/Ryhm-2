@@ -10,7 +10,16 @@
         session_destroy();
         header("Location: page.php");
     }
-
+    
+    //testime klassi
+    //require_once("classes/Test.class.php");
+    //$my_test_object = new Test(33);
+    //echo "Avalik muutuja: " .$my_test_object->non_secret_value;
+    //echo "Salajane muutuja: " .$my_test_object->secret_value;
+    //$my_test_object->multiply();
+    //$my_test_object->reveal();
+    //unset($my_test_object);
+    
     require("page_header.php");
 ?>
 	<h1><?php echo $_SESSION["first_name"] ." " .$_SESSION["last_name"]; ?>, veebiprogrammeerimine</h1>

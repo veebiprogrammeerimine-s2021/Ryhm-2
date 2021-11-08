@@ -14,6 +14,8 @@
     require_once("../../../../config_vp_s2021.php");
 	require_once("fnc_photoupload.php");
     require_once("fnc_general.php");
+    //fotode üleslaadimise klass
+    require_once("classes/Photoupload.class.php");
     
     $photo_error = null;
     $photo_upload_notice = null;
@@ -79,20 +81,13 @@
                 //moodustan failinime, kasutame eesliidet
                 $file_name = $photo_filename_prefix ."_" .$time_stamp ."." .$file_type;
                 
-                //teen graafikaobjekti, image objekti
-                if($file_type == "jpg"){
-                    $my_temp_image = imagecreatefromjpeg($_FILES["photo_input"]["tmp_name"]);
-                }
-                if($file_type == "png"){
-                    $my_temp_image = imagecreatefrompng($_FILES["photo_input"]["tmp_name"]);
-                }
-                if($file_type == "gif"){
-                    $my_temp_image = imagecreatefromgif($_FILES["photo_input"]["tmp_name"]);
-                }
+                //võtame kasutusele klassi, kuni klass ise tüüpi kindlaks ei tee, saadan ka failitüübi
+                $photo_upload = new Photoupload($_FILES["photo_input"], $file_type);
                 
                 //loome uue pikslikogumi
-                $my_new_temp_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
-                                
+                //$my_new_temp_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
+                $photo_upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
+                
                 //lisan vesimärgi
 				
 				add_watermark($my_new_temp_image, $watermark_file);
