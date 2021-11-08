@@ -11,6 +11,12 @@
             $this->my_temp_image = $this->create_image_from_file($this->photo_to_upload["tmp_name"] ,$this->file_type);
         }
         
+        function __destruct(){
+            if(isset($this->my_temp_image)){
+                imagedestroy($this->my_temp_image);
+            }
+        }
+        
         private function create_image_from_file($file, $file_type = "png"){
             $my_temp_image = null;
             //teen graafikaobjekti, image objekti
@@ -69,6 +75,46 @@
             imagefill($this->my_new_image, 0, 0, $trans_color);
             
             imagecopyresampled($this->my_new_image, $this->my_temp_image, 0, 0, $cut_x, $cut_y, $new_w, $new_h, $cut_size_w, $cut_size_h);
+        }
+        
+        public function add_watermark($watermark_file){
+            $watermark = imagecreatefrompng($watermark_file);
+            $watermark_width = imagesx($watermark);
+            $watermark_height = imagesy($watermark);
+            $watermark_x = imagesx($this->my_new_image) - $watermark_width - 10;
+            $watermark_y = imagesy($this->my_new_image) - $watermark_height - 10;
+            imagecopy($this->my_new_image, $watermark, $watermark_x, $watermark_y, 0, 0, $watermark_width, $watermark_height);
+            imagedestroy($watermark);
+        }
+        
+        public function save_image($target){
+            $notice = null;
+            
+            if($this->file_type == "jpg"){
+                if(imagejpeg($this->my_new_image, $target, 90)){
+                    $notice = "salvestamine õnnestus!";
+                } else {
+                    $notice = "salvestamisel tekkis tõrge!";
+                }
+            }
+            
+            if($this->file_type == "png"){
+                if(imagepng($this->my_new_image, $target, 6)){
+                    $notice = "salvestamine õnnestus!";
+                } else {
+                    $notice = "salvestamisel tekkis tõrge!";
+                }
+            }
+            
+            if($this->file_type == "gif"){
+                if(imagegif($this->my_new_image, $target)){
+                    $notice = "salvestamine õnnestus!";
+                } else {
+                    $notice = "salvestamisel tekkis tõrge!";
+                }
+            }
+            imagedestroy($this->my_new_image);
+            return $notice;
         }
         
     }//class lõppeb
