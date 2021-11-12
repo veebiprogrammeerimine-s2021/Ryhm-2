@@ -1,0 +1,11 @@
+Tõstke foto ülelsaadimise klassi funktsioonideks kõik, mis saate:
+Faili kontrollimine - kas on foto ja mis tüüpi (file_type)
+Faili mahupiiri kontrollimine
+Failinime loomine (see tähendab, et on vaja ka vastavat muutujat, mis peab põhiprogrammile väljastpoolt kättesaadav olema, põhiprogramm peab seda siis faili salvestamisel kasutada saama).
+
+Lisage klassile ka vea meelespidamise muutuja (error), mida siis saab väljaspool küsida ning selle väärtusest sõltuvalt edasi tegutseda.
+
+Korrastage põhiprogrammi, et kõik vigade kontrollid jms oleks loogiliselt ja toimiks.
+
+Kes julgeb end proovile panna - lisage sama klassi abil fotode üleslaadimine veel kusagile. Valida saab näiteks kasutaja profiilipiltide laadimine (vajab ka andmebaasiga tegelemist), bännerite üleslaadimine (peaks siis muidugi mingi uue bänneri ka tekitama), page.php lehel näidatava juhusliku foto lisamine (andmebaasi pole vaja, lihtsalt foto laadimine aga kindla suurusega).
+
