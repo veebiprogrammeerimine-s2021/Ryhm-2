@@ -36,14 +36,14 @@
         $skip = ($page - 1) * $page_limit;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$conn->set_charset("utf8");
-        $stmt = $conn->prepare("SELECT filename, created, alttext FROM vp_photos WHERE privacy >= ? AND deleted IS NULL ORDER BY id DESC LIMIT ?,?");
+        $stmt = $conn->prepare("SELECT id, filename, created, alttext FROM vp_photos WHERE privacy >= ? AND deleted IS NULL ORDER BY id DESC LIMIT ?,?");
         echo $conn->error;
         $stmt->bind_param("iii", $privacy, $skip, $page_limit);
-        $stmt->bind_result($filename_from_db, $created_from_db, $alttext_from_db);
+        $stmt->bind_result($id_from_db, $filename_from_db, $created_from_db, $alttext_from_db);
         $stmt->execute();
         while($stmt->fetch()){
             //<div class="thumbgallery">
-            //<img src="kataloog.file" alt="tekst">
+            //<img src="kataloog.file" alt="tekst" class="thumbs" data-id="x" data-fn="see.jpg">
             //</div>
             $gallery_html .= '<div class="thumbgallery">' ."\n";
             $gallery_html .= '<img src="' .$GLOBALS["photo_thumbnail_upload_dir"] .$filename_from_db .'" alt="';
@@ -52,7 +52,7 @@
             } else {
                 $gallery_html .= $alttext_from_db;
             }
-            $gallery_html .= '" class="thumbs">' ."\n";
+            $gallery_html .= '" class="thumbs" data-id="' .$id_from_db .'" data-fn="' .$filename_from_db .'">' ."\n";
 			$gallery_html .= "<p>Lisatud: " .date_to_est_format($created_from_db) ."</p> \n";
             $gallery_html .= "</div> \n";
         }
