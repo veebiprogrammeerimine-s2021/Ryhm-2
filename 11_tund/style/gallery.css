@@ -1,0 +1,30 @@
+.gallery
+{
+	width: 80%;
+}
+
+.thumbgallery
+{
+	width: 100px;
+	height: 200px;
+	padding: 5px;
+	float: left;
+	margin-right: 5px;
+}
+
+.thumbs
+{
+    border-radius: 5px;
+    cursor: pointer;
+	opacity: 0.7;
+	transform-origin: 50% 50%;
+    transition: 0.3s;
+	filter: blur(1px);
+}
+
+.thumbs:hover
+{	
+	opacity: 1;
+	filter: none;
+	transform: scale(1.05);
+}
