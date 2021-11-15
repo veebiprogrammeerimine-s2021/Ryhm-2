@@ -28,11 +28,27 @@
     }
     
     $to_head = '<link rel="stylesheet" type="text/css" href="style/gallery.css">' ."\n";
+    $to_head .= '<link rel="stylesheet" type="text/css" href="style/modal.css">' ."\n";
+    $to_head .= '<script src="javascript/modal.js" defer></script>' ."\n";
     
     require("page_header.php");
 ?>
 
-	<h1><?php echo $_SESSION["first_name"] ." " .$_SESSION["last_name"]; ?>, veebiprogrammeerimine</h1>
+    <!--Modaalakna osa galerii jaoks-->
+    <div id="modalarea" class="modalarea">
+        <!--Sulgemisnupp-->
+        <span id="modalclose" class="modalclose">&times;</span>
+        <!--pildikoht-->
+        <div class="modalhorizontal">
+            <div class="modalvertical">
+                <p id="modalcaption"></p>
+                <img id="modalimg" src="../pics/empty.png" alt="Galeriipilt">
+                <br>
+            </div>
+        </div>
+    </div>
+	
+    <h1><?php echo $_SESSION["first_name"] ." " .$_SESSION["last_name"]; ?>, veebiprogrammeerimine</h1>
 	<p>See leht on valminud õppetöö raames ja ei sisalda mingisugust tõsiseltvõetavat sisu!</p>
 	<p>Õppetöö toimus <a href="https://www.tlu.ee/dt">Tallinna Ülikooli Digitehnoloogiate instituudis</a>.</p>
 	<hr>
@@ -42,6 +58,7 @@
     </ul>
 	<hr>
     <h2>Fotogalerii</h2>
+    
     <p>
         <?php
             if($page > 1){
@@ -57,6 +74,8 @@
             
         ?>
     </p>
-    <?php echo read_public_photo_thumbs($page_limit, $page); ?>
+    <div id="gallery" class="gallery">
+        <?php echo read_public_photo_thumbs($page_limit, $page); ?>
+    </div>
 </body>
 </html>
