@@ -1,0 +1,17 @@
+Seekord tuleb viimistleda fotogaleriid.
+Esiteks kohendage store_photoratings.php faili, mis salvestab fotodele antavaid hindeid.
+Praegu eeldatakse, et on olemas väärtused GET meetodil saadetud parameetritele photo ja rating (selle foto id, mida hinnatakse ja hinne).
+Lisage kontroll, mille tulemusena:
+kui mõlemad või ainult id (parameeter photo) puudu, siis tagastatakse hinde asemel teade: "Hinne teadmata!";
+kui hinne on puudu, siis ei salvestata midagi, tagastatakse vastava id-ga foto keskmine hinne.
+
+Täiendage galeriid sedasi, et kõikide pisipiltide alla, lisaks üleslaadimise kuupäevale, pandaks ka omaniku (kes üles laadis) nimi ja senine keskmine hinne. Kui pole veel hinnet, siis tuleks hinde asemel näidata teadet: "pole hinnatud"
+
+Keskmise hinde näitamiseks tuleks lisada tekstilõik (element <p>), millele tuleks anda id, mis on seotud vastava foto id-ga. Näiteks:
+<p id="rating44">3.5</p>
+
+Nii saab selle tekstilõigu poole pöörduda ka Javascripti abil. Nüüd võiks foto hindamisel uuendatud keskmise hinde kirjutada ka selle lõigu sisse!
+
+SQL päringu, mis vajaliku info andmebaasist loeb, võib kirjutada selliselt:
+
+SELECT vp_photos.id, filename, alttext, firstname, lastname, AVG(rating) as AvgValue FROM vp_photos JOIN vp_users ON vp_photos.userid = vp_users.id LEFT JOIN vp_photoratings ON vpr_photoratings.photoid = vp_photos.id WHERE vp_photos.privacy >= ? AND deleted IS NULL GROUP BY vp_photos.id DESC
