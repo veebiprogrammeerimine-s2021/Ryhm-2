@@ -18,8 +18,7 @@ window.onload = function(){
 
 function openModal(e){
     modalImg.src = photoDir + e.target.dataset.fn;
-	modalImg.src = "../../../show_photo.php?photo=" + e.target.dataset.id;
-    photoId = e.target.dataset.id;
+	photoId = e.target.dataset.id;
     captionText.innerHTML = e.target.alt;
     modalImg.alt = e.target.alt;
     document.querySelector("#avgRating").innerHTML = "";
