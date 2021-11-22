@@ -6,14 +6,16 @@
         $privacy = 3;
         $conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$conn->set_charset("utf8");
-        $stmt = $conn->prepare("SELECT filename, alttext FROM vp_photos WHERE id = (SELECT MAX(id) FROM vp_photos WHERE privacy = ? AND deleted IS NULL)");
+        $stmt = $conn->prepare("SELECT id, filename, alttext FROM vp_photos WHERE id = (SELECT MAX(id) FROM vp_photos WHERE privacy = ? AND deleted IS NULL)");
         echo $conn->error;
         $stmt->bind_param("i", $privacy);
-        $stmt->bind_result($filename_from_db, $alttext_from_db);
+        $stmt->bind_result($id_from_db, $filename_from_db, $alttext_from_db);
         $stmt->execute();
         if($stmt->fetch()){
             //<img src="kataloog.file" alt="tekst">
-            $photo_html = '<img src="' .$GLOBALS["photo_normal_upload_dir"] .$filename_from_db .'" alt="';
+            //<img src="show_public_photo.php?photo=44" alt="tekst">
+            //$photo_html = '<img src="' .$GLOBALS["photo_normal_upload_dir"] .$filename_from_db .'" alt="';
+            $photo_html = '<img src="show_public_photo.php?photo=' .$id_from_db .'" alt="';
             if(empty($alttext_from_db)){
                 $photo_html .= "Üleslaetud foto";
             } else {

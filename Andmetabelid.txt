@@ -9,3 +9,9 @@ CREATE TABLE `if21_rinde`.`vp_photos` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `
 
 Fotode hinnete tabel
 CREATE TABLE `if21_rinde`.`vp_photoratings` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `photoid` INT(11) NOT NULL , `userid` INT(11) NOT NULL , `rating` INT(1) NOT NULL , `added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+Uudiste tabel
+CREATE TABLE `if21_rinde`.`vp_news` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userid` INT(11) NOT NULL , `title` VARCHAR(140) NOT NULL , `content` VARCHAR(2000) NOT NULL , `expire` DATE NOT NULL , `added` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `photoid` INT(11) NULL , `deleted` DATETIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+Uudiste fotod
+CREATE TABLE `if21_rinde`.`vp_newsphotos` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `filename` VARCHAR(64) NOT NULL , `added` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `userid` INT(11) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
