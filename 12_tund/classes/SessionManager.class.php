@@ -53,7 +53,6 @@ class SessionManager
 	static function regenerateSession()
 	{
 		// If this session is obsolete it means there already is a new id
-		//if(isset($_SESSION['OBSOLETE']) || $_SESSION['OBSOLETE'] == true)
 		if(isset($_SESSION['OBSOLETE']) && $_SESSION['OBSOLETE'] == true)
 			return;
 
