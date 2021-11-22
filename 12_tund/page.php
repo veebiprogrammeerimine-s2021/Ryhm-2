@@ -8,6 +8,7 @@
 	$todays_evaluation = null; //$todays_evaluation = "";
 	$inserted_adjective = null;
 	$adjective_error = null;
+    //var_dump($_COOKIE);
 	
 	//kontrollin kas on klikitud submit nuppu
 	if(isset($_POST["todays_adjective_input"])){
