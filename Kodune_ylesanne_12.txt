@@ -1,0 +1,23 @@
+Põhimõtteliselt viimane kodune ülesanne.
+
+Alustasime tunnis uudiste lisamise lehe loomist.
+Minu githubi laetud failis add_news.php on lisatud ka kommentaare selle kohta, mida ja kuidas kontrollida, jälgida.
+
+Hoolitsege, et vorm oleks valmis - sisestada saaks uudise pealkirja, uudise sisu, uudise viimast näitamise päeva (kehtivus) ja soovi korral ka uudisega seotud foto.
+
+Uudise salvestamise nupul klõpsamisel tuleb kontrollida, kas kohustuslikud andmed (pealkiri, sisu ja kehtivusaeg) on olemas ja korrektsed.
+Kui miski on puudu, siis peab vorm varasemad sisestused meeles pidama ja uue võimaluse andma (nagu tavaliselt).
+
+Kui on valitud ka foto, siis tuleb selle salvestamise ja andmebaasi kandmisega kõige enne tegeleda, siis saab tema id ($conn->insert_id) ja selle saab siis omakorda salvestada andmebaasi koos uudisega.
+
+Nii uudiste fotode kui ka uudiste andmetabelite loomise SQL käsud on Githubis Andmetabelid.txt failis leitavad.
+
+Uudise salvestamise edukasalvestamise järel võiks vormi uue uudise jaoks tühjendada (unustada varasemad sisestused).
+
+Kõiki veel aegumata uudiseid peaks näitama home.php lehel (näevad siis vaid sisseloginud kasutajad).
+Uudise pealkiri peaks olema element <h3>
+Uudise sisu on nagunii html-elementidena (vajab seda htmlspecialchars_decode() kodeerimist).
+Uudise pealkirja all (enne sisu) peaks olema uudise lisanud kasutaja nimi ja uudise lisamise aeg.
+Kui uudisega on sisestatud foto, siis tuleb ka seda näidata.
+
+Usinamad hajutajad lisavad võimaluse valida, mitut viimast uudist näidatakse ning näiteks ka võimaluse uudiseid toimetada/muuta. Näiteks võiks iga sisseloginud kasutaja saada muuta kõiki veel aegumata uudiseid (ka teiste lisatuid).
