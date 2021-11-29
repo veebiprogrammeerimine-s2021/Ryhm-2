@@ -2,20 +2,23 @@
     require_once("use_session.php");
 	
     require_once("../../../../config_vp_s2021.php");
-	require_once("fnc_photoupload.php");
+	require_once("fnc_news.php");
     require_once("fnc_general.php");
     //fotode üleslaadimise klass
     require_once("classes/Photoupload.class.php");
     
     
     $news_notice = null;
-    
+    $news_error = null;
+	$news_title = null;
+	$news = null;
     //uudise aegumine
     $expire = new DateTime("now");
     $expire->add(new DateInterval("P7D"));
     
     $expire_date = date_format($expire, "Y-m-d");
     //echo $expire_date;
+	$photo_file = null;
     
     $normal_photo_max_width = 600;
     $normal_photo_max_height = 400;
@@ -34,8 +37,51 @@
         //uudsie näitamisel tuleb arvestada ka aegumist
         //$today = date("Y-m-d");
         //SQL lauses   WHERE added >= ?
-       
-        
+		if(empty($_POST["title_input"])){
+			$news_error = "Uudise pealkiri on puudu!";
+		} else {
+			$news_title = test_input($_POST["title_input"]);
+		}
+		if(empty($_POST["news_input"])){
+			$news_error .= " Uudise sisu on puudu!";
+		} else {
+			$news = test_input($_POST["news_input"]);
+		}
+		
+		if(!empty($_POST["expire_input"])){
+			$expire_date = $_POST["expire_input"];
+			//echo $expire_date;
+		} else {
+			$news_error .= " Palun vali Aegumistähtaja päev!";
+		}
+		if($expire_date < date("Y-m-d")){
+			$news_error .= " Aegumistähtaeg on minevikus!";
+		}
+		
+		//kas foto on valitud
+        if(isset($_FILES["photo_input"]["tmp_name"]) and !empty($_FILES["photo_input"]["tmp_name"])){
+			$photo_upload = new Photoupload($_FILES["photo_input"]);
+			if(empty($photo_upload->error)){
+				$photo_upload->check_alowed_type($allowed_photo_types);
+				if(empty($photo_upload->error)){
+					$photo_upload->check_size($photo_upload_size_limit);
+					if(empty($photo_upload->error) and empty($news_error)){
+						$photo_upload->create_filename($photo_filename_prefix);
+						$photo_upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
+						$news_notice = "Uudise pildi " .$photo_upload->save_image($photo_news_upload_dir .$photo_upload->file_name);
+						$photo_file .= $photo_upload->file_name;
+						echo $photo_file;
+					}
+				}
+			}
+			$news_error .= $photo_upload->error;
+			
+			unset($photo_upload);
+		}
+		if(empty($news_error)){
+			$news_notice .= save_news($news_title, $news, $expire_date, $photo_file);
+		}
+
     }
     
     $to_head = '<script src="javascript/checkFileSize.js" defer></script>' ."\n";
@@ -56,10 +102,10 @@
     <h2>Uudise lisamine</h2>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
         <label for="title_input">Uudise pealkiri</label>
-        <input type="text" id="title_input" name="title_input">
+        <input type="text" id="title_input" name="title_input" value="<?php echo $news_title; ?>">
         <br>
         <label for="news_input">Uudis</label>
-        <textarea id="news_input" name="news_input"></textarea>
+        <textarea id="news_input" name="news_input"><?php echo htmlspecialchars_decode($news); ?></textarea>
         <script>CKEDITOR.replace( 'news_input' );</script>
         <br>
         <label for="expire_input">Viimane kuvamine kuupäev</label>
@@ -69,7 +115,7 @@
         <input type="file" name="photo_input" id="photo_input">
         
         <br>
-        <input type="submit" name="news_submit" id="news_submit" value="Salvesta uudis"><span id="notice"></span>
+        <input type="submit" name="news_submit" id="news_submit" value="Salvesta uudis"><span id="notice"><?php echo $news_error; ?></span>
     </form>
     <span><?php echo $news_notice; ?></span>
 </body>

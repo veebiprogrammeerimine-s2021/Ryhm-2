@@ -1,0 +1,4 @@
+Peole registreerumine
+•	Peole registreerumislehel tuleb sisestada oma eesnimi, perekonnanimi ja üliõpilaskood (6 numbrit). Andmetabel sisaldab loomulikult ka registreerumise id-d ning lisaks veel välja info jaoks, kas osavõtutasu on makstud (see võib esialgu tühjaks jääda) ning välja tähistamaks, kas registreerumine on tühistatud.
+•	Administraatori lehel saab näha nimekirja kõigist registreerunutest koos infoga, kas on makstud või mitte. On võimalus märkida osavõtutasu makstuks.
+•	Registreerumisleht näitab registreerujatele infot, kui palju on inimesi registreerunud ja paljud neist on tasunud (kindlad tulijad). Eraldi leht peaks võimaldama oma registreerumist tühistada, tühistamiseks peaks inimene sisestama oma üliõpilaskoodi.
