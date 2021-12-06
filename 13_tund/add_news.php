@@ -70,7 +70,6 @@
 						$photo_upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
 						$news_notice = "Uudise pildi " .$photo_upload->save_image($photo_news_upload_dir .$photo_upload->file_name);
 						$photo_file .= $photo_upload->file_name;
-						echo $photo_file;
 					}
 				}
 			}
